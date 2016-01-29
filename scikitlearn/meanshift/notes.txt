@@ -1,0 +1,24 @@
+MAKE_BLOBS:
+La fonction make_blobs crée des nuages de points autour de centres définis.
+Elle prend en paramètre n_samples, le nombre de points à répartir
+centers: un tableau contenant des coordonnées des centres de chaque nuage
+cluster_std l'indice de dispersion des points
+
+Elle retourne le tableau des coordonnées de chaque point, et le tableau des centres associés à chaque point.
+
+MEANSHIFT:
+Cet algorithme regroupe des points en nuages de points et en détermine le centre.
+
+Instanciation grâce à MeanShift (la bande passante peut être passée en paramètre ou être déduite grâce à estimate_bandwidth)
+
+ms.fit(X)
+envoie un tableau de point à l'algorithme
+
+Retour:
+ms.labels_ contient les nuages auxquels appartiennent chaque point
+ms_cluster_centers_ contient les centres de chaque nuage
+Les centres n'existent pas forcémment parmi les points de base, et pourrait donc donner pour les tweets un tweet "moyen" contenant les mots en commun au groupe de tweets
+
+On doit pouvoir jouer avec la bande passante en argument de MeanShift pour influencer le choix des regroupements
+
+Défaut de cet algorithme: Tous les points sont associés à un regroupement. Les tweets sans intérêt influenceront donc le résultat (peut être de manière négligeable).
