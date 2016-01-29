@@ -2,18 +2,18 @@ import numpy as np
 from sklearn.cluster import MeanShift, estimate_bandwidth
 from sklearn.datasets.samples_generator import make_blobs
 
-# Génération d'un vecteur temporaire correspondant à l'entrée du programme (à supprimer par la suite)
+# Generation d'un vecteur temporaire correspondant a l'entree du programme (a supprimer par la suite)
 centers = [[1, 1, 1], [5, 4, 9], [-4, -8, 0]]
 X, _ = make_blobs(n_samples=500, centers=centers, cluster_std=0.6)
 
-# Facteur à modifier pour influencer les résultats
+# Facteur a modifier pour influencer les resultats
 bandwidth = estimate_bandwidth(X, quantile=0.2, n_samples=500)
 
 # Application de l'algorithme MeanShift
 ms = MeanShift(bandwidth=bandwidth, bin_seeding=True)
 ms.fit(X)
 
-# Récupération des étiquettes de chaque point et du centre de chaque regroupement
+# Recuperation des etiquettes de chaque point et du centre de chaque regroupement
 labels = ms.labels_
 cluster_centers = ms.cluster_centers_
 
