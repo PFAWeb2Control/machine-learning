@@ -2,7 +2,7 @@ import numpy as np
 from sklearn.cluster import MeanShift, estimate_bandwidth
 from sklearn.datasets.samples_generator import make_blobs
 
-# Generation d'un vecteur temporaire correspondant a l'entree du programme (a supprimer par la suite)
+# Generation d'une matrice temporaire correspondant a l'entree du programme (a supprimer par la suite)
 centers = [[1, 1, 1], [5, 4, 9], [-4, -8, 0]]
 X, _ = make_blobs(n_samples=500, centers=centers, cluster_std=0.6)
 
