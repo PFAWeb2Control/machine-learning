@@ -2,8 +2,8 @@ import numpy as np
 from sklearn.cluster import MeanShift, estimate_bandwidth
 from sklearn.datasets.samples_generator import make_blobs
 
-centers = [[1, 1]]
-X, _ = make_blobs(n_samples=100, centers=centers, cluster_std=0.1)
+centers = [[1, 1],[5,3],[-2,-1]]
+X, _ = make_blobs(n_samples=1000, centers=centers, cluster_std=0.5)
 
 print X
 
