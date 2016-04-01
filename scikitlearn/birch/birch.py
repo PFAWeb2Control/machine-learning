@@ -1,13 +1,13 @@
 import numpy as np
 from sklearn.cluster import Birch
 
-#Initialiser le classificateur
+# Initializes the classificator
 def clf_init(b_factor = 50, threshold = 0.8):
     return Birch(branching_factor=b_factor, n_clusters=None, threshold=threshold, compute_labels=True)
 
-#Ajouter des vecteurs à classer
-#Data doit être de dimension 2 (array ou list), même pour ajouter un seul vecteur
-#Retourne une tableau contenant le numéro de clusters de chaque data
+# Adds vectors to cluster
+# Data must be a 2-dimensions array or list, even to add only one vector
+# Return an array Retourne une tableau contenant le numéro de clusters de chaque data
 def clf_add_data(clf, data):
     if (type(data) is list):
         data = np.asarray(data)

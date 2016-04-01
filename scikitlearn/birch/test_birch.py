@@ -8,7 +8,7 @@ n_samples = 50
 centers = [[0, 1], [4, -2], [-2, 2], [0, -1]]
 X, _ = make_blobs(n_samples=n_samples, centers=centers, cluster_std=0.2)
 
-plt.plot([X[a][0] for a in range(n_samples)], [X[b][1] for b in range(n_samples)], col + '.')
+plt.plot([X[a][0] for a in range(n_samples)], [X[b][1] for b in range(n_samples)], '.')
 plt.show()
 
 brc = Birch(branching_factor=50, n_clusters=None, threshold=0.8, compute_labels=True)
@@ -18,7 +18,7 @@ n_samples_2 = 200
 centers_2 = [[10,10], [0,1]]
 X2, _ = make_blobs(n_samples=n_samples_2, centers=centers_2, cluster_std=0.2)
 
-plt.plot([X2[a][0] for a in range(n_samples_2)], [X2[b][1] for b in range(n_samples_2)], col + '.')
+plt.plot([X2[a][0] for a in range(n_samples_2)], [X2[b][1] for b in range(n_samples_2)], '.')
 plt.show()
 
 labels = brc.labels_

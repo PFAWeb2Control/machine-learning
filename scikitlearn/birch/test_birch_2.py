@@ -15,9 +15,9 @@ plt.show()
 def clf_init(b_factor = 50, threshold = 0.8):
     return Birch(branching_factor=b_factor, n_clusters=None, threshold=threshold, compute_labels=True)
 
-#Ajouter des vecteurs à classer. 
-#Data doit être un une liste de vecteurs. Pour ajouter un seul vecteur x -> data = [x]
-#Retourne une tableau contenant le numéro de clusters de chaque data
+#Ajouter des vecteurs a classer. 
+#Data doit etre un une liste de vecteurs. Pour ajouter un seul vecteur x -> data = [x]
+#Retourne une tableau contenant le numero de clusters de chaque data
 def clf_add_data(clf, data):
     clf.partial_fit(np.asarray(data))
     return brc.labels_
@@ -26,7 +26,7 @@ def clf_add_data(clf, data):
 def clf_cluster_centers(clf):
     return clf.subcluster_centers_
 
-brc = init_clf()
+brc = clf_init()
 
 plt.figure(1)
 plt.clf()
