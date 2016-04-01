@@ -1,19 +1,28 @@
+# coding: utf-
+from itertools import cycle
+from time import time
 import numpy as np
+
 from sklearn.cluster import Birch
+    
+def birch_algo(X, threshold=1.7, clustering=None):
+        birch = Birch(threshold=threshold, n_clusters=clustering)
+        birch.fit(X)
+        labels = birch.labels_
+        centroids = birch.subcluster_centers_
+        labels_unique = np.unique(labels)
+        n_clusters = labels_unique.size
+        print(" The number of clusters is : %d" % n_clusters)
 
-# Initializes the classificator
-def clf_init(b_factor = 50, threshold = 0.8):
-    return Birch(branching_factor=b_factor, n_clusters=None, threshold=threshold, compute_labels=True)
+     #    print("Centre(s):")
+     #    for i in range(n_clusters):
+     #    	print i,
+     #    	print centroids[i]
 
-# Adds vectors to cluster
-# Data must be a 2-dimensions array or list, even to add only one vector
-# Return an array Retourne une tableau contenant le numéro de clusters de chaque data
-def clf_add_data(clf, data):
-    if (type(data) is list):
-        data = np.asarray(data)
-    clf.partial_fit(np.asarray(data))
-    return brc.labels_
+        return labels, centroids, n_clusters     
 
-#Retourne les centres de chaque cluster
-def clf_cluster_centers(clf):
-    return clf.subcluster_centers_
+
+
+  
+
+

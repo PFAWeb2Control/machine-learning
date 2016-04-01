@@ -1,57 +1,59 @@
-import numpy as np
-from sklearn.cluster import Birch
-from sklearn.datasets.samples_generator import make_blobs
-import matplotlib.pyplot as plt
+# coding: utf-
 from itertools import cycle
+from time import time
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.colors as colors
 
-n_samples = 50
-centers = [[0, 1], [4, -2], [-2, 2], [0, -1]]
-X, _ = make_blobs(n_samples=n_samples, centers=centers, cluster_std=0.2)
+from sklearn.datasets.samples_generator import make_blobs
+from birch import birch_algo
 
-plt.plot([X[a][0] for a in range(n_samples)], [X[b][1] for b in range(n_samples)], '.')
-plt.show()
+from sklearn.cluster import Birch
 
-brc = Birch(branching_factor=50, n_clusters=None, threshold=0.8, compute_labels=True)
-brc.fit(X)
+# Generate centers for the blobs so that it forms a 10 X 10 grid.
+xx = np.linspace(-22, 22, 10)
+yy = np.linspace(-22, 22, 10)
+xx, yy = np.meshgrid(xx, yy)
+n_centres = np.hstack((np.ravel(xx)[:, np.newaxis],
+                       np.ravel(yy)[:, np.newaxis]))
 
-n_samples_2 = 200
-centers_2 = [[10,10], [0,1]]
-X2, _ = make_blobs(n_samples=n_samples_2, centers=centers_2, cluster_std=0.2)
+# Generate blobs to do a comparison between MiniBatchKMeans and Birch.
+X, y = make_blobs(n_samples=100000, centers=n_centres, random_state=0)
+   
 
-plt.plot([X2[a][0] for a in range(n_samples_2)], [X2[b][1] for b in range(n_samples_2)], '.')
-plt.show()
+# Use all colors that matplotlib provides by default.
+colors_ = cycle(colors.cnames.keys())
 
-labels = brc.labels_
-print len(labels)
-cluster_centers = brc.subcluster_centers_
-print len(cluster_centers)
+fig = plt.figure(figsize=(12, 4))
+fig.subplots_adjust(left=0.04, right=0.98, bottom=0.1, top=0.9)
 
-labels_unique = np.unique(labels)
-n_clusters_ = len(labels_unique)
+#Compute clustering with Birch with and without the final clustering step and plot.
 
-brc.partial_fit(X2)
+labels1, centroids1, n_clusters1 = birch_algo(X, clustering=None)
+labels2, centroids2, n_clusters2 = birch_algo(X, clustering=100) 
 
-labels = np.concatenate([labels,brc.labels_])
-print len(labels)
+labels = labels1, labels2
+centroids = centroids1, centroids2
+n_clusters = n_clusters1, n_clusters2
 
-cluster_centers = brc.subcluster_centers_ #Tous les centres existants (anciens et nouveaux)
-print len(cluster_centers)
 
-labels_unique = np.unique(labels)
-n_clusters_ = len(labels_unique)
+final_step = ['without global clustering', 'with global clustering']
 
-print n_clusters_
+for i in range(0, 2):
+    ind = i + 1
+    ax = fig.add_subplot(1, 3, ind +1)
+    print(i)
+    for this_centroids, k, col in zip(centroids[i], range(n_clusters[i]), colors_ ):
+        mask = labels[i] == k
+        ax.plot(X[mask, 0], X[mask, 1], 'w', markerfacecolor=col, marker='.')
+        if n_clusters[i] is None:
+                ax.plot(this_centroids[0], this_centroid[1], '+', markerfacecolor=col,
+                        markeredgecolor='k', markersize=5)
+        ax.set_ylim([-25, 25])
+        ax.set_xlim([-25, 25])
+        ax.set_autoscaley_on(False)
+        ax.set_title('Birch %s' % final_step[i])
+        print(i)
 
-X_tot = np.concatenate([X,X2])
 
-plt.figure(1)
-plt.clf()
-
-colors = cycle('bgrcmykbgrcmykbgrcmykbgrcmyk')
-for k, col in zip(range(n_clusters_), colors):
-    my_members = labels == k
-    cluster_center = cluster_centers[k]
-    plt.plot(X_tot[my_members, 0], X_tot[my_members, 1], col + '.')
-    plt.plot(cluster_center[0], cluster_center[1], 'o', markerfacecolor=col, markeredgecolor='k', markersize=14)
-plt.title('Estimated number of clusters: %d' % n_clusters_)
 plt.show()
