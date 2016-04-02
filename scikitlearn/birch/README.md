@@ -1,5 +1,5 @@
 # birch.py
-Implements functions to use Birch with an array of data.
+Implements a function to use Birch with an array of data.
 
 # test_birch.py
 Compares Birch with and without clustering on a synthetic dataset having 100000 samples.
