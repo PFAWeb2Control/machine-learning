@@ -28,7 +28,6 @@ fig = plt.figure(figsize=(12, 4))
 fig.subplots_adjust(left=0.04, right=0.98, bottom=0.1, top=0.9)
 
 #Compute clustering with Birch with and without the final clustering step and plot.
-
 labels1, centroids1, n_clusters1 = birch_algo(X, clustering=None)
 labels2, centroids2, n_clusters2 = birch_algo(X, clustering=100) 
 
@@ -39,6 +38,7 @@ n_clusters = n_clusters1, n_clusters2
 
 final_step = ['without global clustering', 'with global clustering']
 
+#plot the results of birch with and without clustering.
 for i in range(0, 2):
     ind = i + 1
     ax = fig.add_subplot(1, 3, ind +1)
