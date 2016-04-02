@@ -42,7 +42,6 @@ final_step = ['without global clustering', 'with global clustering']
 for i in range(0, 2):
     ind = i + 1
     ax = fig.add_subplot(1, 3, ind +1)
-    print(i)
     for this_centroids, k, col in zip(centroids[i], range(n_clusters[i]), colors_ ):
         mask = labels[i] == k
         ax.plot(X[mask, 0], X[mask, 1], 'w', markerfacecolor=col, marker='.')
@@ -53,7 +52,6 @@ for i in range(0, 2):
         ax.set_xlim([-25, 25])
         ax.set_autoscaley_on(False)
         ax.set_title('Birch %s' % final_step[i])
-        print(i)
 
 
 plt.show()
