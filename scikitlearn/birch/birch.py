@@ -8,11 +8,11 @@ from sklearn.cluster import Birch
 A function that runs the birch clustering algorithm.
 
 Parameters:
--X is our input data (an array)
--threshold is the radius of the subcluster obtained by
+-X[array] is our input data (an array)
+-threshold[float] is the radius of the subcluster obtained by
 merging a new sample and the closest subcluster should
 be lesser than the threshold. Default value is 1.7.
--clustering is number of cluster after the final clustering
+-clustering[int] is number of cluster after the final clustering
 which treats the subclusters from the leaves as new sample.
 By default, this final clustering step is not performed and
 the subclusters are returned as they are.
