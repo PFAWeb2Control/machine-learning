@@ -19,7 +19,7 @@ It returns a list with two elements:
 basic_CEM
 ---------
 Simple implementation of the [CEM](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm#Gaussian_mixture) algorithm.
-It returns a <number of vectors> * <number of clusters> matrix, where i^th * j^th element is the probability for the i^th data vector to 
+It returns a number_of_vectors * number_of_clusters matrix, where i^th * j^th element is the probability for the i^th data vector to 
 belong to the j^th cluster.
 It uses a pseudo random initialisation
 
