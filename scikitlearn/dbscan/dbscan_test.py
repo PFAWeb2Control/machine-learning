@@ -7,7 +7,7 @@ from sklearn.preprocessing import StandardScaler
 
 
 # Generate sample data
-centers = [[1, 1, -1], [-1, -1, -1], [1, -1, 1]]
+centers = [[5, 3, -5], [-2, 1, 3], [1, -1, 1]]
 X, labels_true = make_blobs(n_samples=1000, centers=centers, cluster_std=0.4,
                             random_state=0)
 print(X)
